@@ -795,13 +795,33 @@ footer {
     font-size: 14px;
   }
 
+  #contact {
+    height: min-content;
+  }
+
+  .contact-text {
+    top: 0vh;
+    padding-bottom: 2vh;
+    padding-top: 2vh;
+  }
+
   .contact-icon {
     width: 50px;
     height: 50px;
   }
   .contact-icons {
     width: 38vw;
-    top: 5vh;
+    top: 0vh;
+    padding-bottom: 5vh;
+  }
+}
+
+@media screen and (orientation: portrait) and (min-device-width: 375px) and (max-device-width: 667px) {
+  .menu-triger {
+    width: 20px;
+    height: 20px;
+    background-size: 20px 20px;
+    top: 6px;
   }
 }
 
