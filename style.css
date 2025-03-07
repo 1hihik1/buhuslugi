@@ -1,0 +1,813 @@
+:root {
+  --block-width: 60vw;
+  --block-width-mobile: 80vw;
+  --block-height: min-content;
+}
+
+html,
+body {
+  background-color: #f1f1f1;
+  height: 100%; /* Занимаем всю высоту окна браузера */
+  margin: 0;
+  scroll-behavior: smooth; /* плавное перемещение-скролл для всех якорей*/
+}
+
+header {
+  box-shadow: 0 0 10px 5px rgba(53, 53, 53, 0.63);
+  width: 100%;
+  height: 5vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+
+  position: fixed;
+  top: -0.001vh;
+  z-index: 11;
+}
+
+#logo {
+  /*padding-left: 10vw; /* Сдвигаем логотип вправо */
+  /*margin-right: 20px; /* Отступ от правого края */
+  height: 5vh; /* Настройте высоту логотипа */
+  position: absolute;
+  right: 15px;
+  cursor: pointer;
+}
+
+a.link {
+  display: inline-block;
+  text-decoration-style: dotted;
+  text-decoration-thickness: 2px;
+  color: #2688cb;
+}
+
+/*#region menu*/
+.Up-menu {
+  display: flex;
+  position: relative;
+  margin: auto auto auto auto;
+  justify-content: space-between;
+  width: 30vw;
+
+  font-family: "Verdana", Arial;
+  font-size: 22px;
+  color: #185781;
+}
+a.menua,
+a.menua:visited {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative; /* Добавляем позиционирование для ссылок */
+  /*transition: color 0.3s;*/
+
+  /*background: linear-gradient(#000 0 0) top / 100% var(--d, 0%) no-repeat;
+    transition: 0.5s;*/
+}
+
+a.menua:hover {
+  /*color: #71992a;*/
+  text-decoration: none;
+  cursor: pointer; /*
+    --d: 50%;*/
+}
+/* нижнее подчёркивание из центра */
+a.menua::after {
+  content: "";
+  position: absolute;
+  left: 50%; /* Начинаем с центра */
+  bottom: 0; /* Размещаем под текстом */
+  width: 0; /* Начальная ширина линии */
+  height: 2px; /* Толщина линии */
+  background-color: #185781; /* Цвет линии */
+  transition: all 0.5s ease; /* Плавная анимация */
+  transform: translateX(-50%); /* Центрируем линию */
+}
+
+a.menua:hover::after {
+  width: 100%; /* Расширяем линию на всю ширину текста */
+}
+
+/* анимация нижнего подчёркивания для второго меню(мобильная версия)*/
+a.menub,
+a.menub:visited {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+}
+
+a.menub::after {
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #185781;
+  width: 0;
+  transition: 0.3s;
+}
+
+a.menub:hover:after {
+  width: 100%;
+}
+
+.menu-triger {
+  background: url(images/menu-burger.svg) 0 0 repeat;
+  background-size: 50px 50px;
+  background-position: center;
+  display: block;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  left: 15px;
+  top: 0px;
+}
+.menu-close {
+  background: url(images/exit.svg) 0 0 repeat;
+  background-size: 50px 50px;
+  display: block;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  z-index: 100;
+}
+.menu-popup {
+  background: white;
+  display: none;
+  position: absolute;
+  left: -110%;
+  top: 0;
+  width: 250px;
+  box-sizing: border-box;
+  padding: 30px;
+  z-index: 9999;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+.menu-popup ul {
+  margin: 0;
+  padding: 0;
+}
+.menu-popup li {
+  list-style: none;
+  margin: 10px 0;
+  padding: 0;
+}
+.menu-popup li a {
+  font-size: 18px;
+  font-family: "Arial";
+  color: #185781;
+  line-height: 1.4;
+  text-decoration: none;
+}
+.body_pointer * {
+  cursor: pointer;
+}
+
+/*#endregion*/
+
+main {
+  display: inline-block;
+  width: 100vw;
+  min-height: 90vh; /* Минимальная высота чтобы контент растягивался на всю доступную высоту не выходя за пределы main*/
+  flex: 1; /* Основной контент растягивается, чтобы занять всё доступное пространство */
+  margin-bottom: 10vh;
+}
+
+.wrapper {
+  /*
+  width: 100%;
+  display: flex;
+  flex-direction: column; /* Располагаем элементы вертикально 
+  min-height: 100vh; /* Минимальная высота — вся высота окна */
+  display: grid;
+  grid-template-rows: auto 1fr auto; /* Шапка, основной контент, футер */
+  height: min-content; /* Минимальная высота — вся высота окна */
+}
+
+/* Стили для кнопки "наверх" */
+#scrollToTopBtn {
+  display: none; /* Начинаем с скрытой кнопки */
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-image: url(images/up_button.svg);
+  background-size: 75px 75px;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 48px; /*6vh*/
+  width: 56px; /*3vw*/
+  cursor: pointer;
+  padding: 0px;
+  border-radius: 100px;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Горизонтальное смещение, вертикальное смещение, размытие и цвет тени */
+  transition: box-shadow 0.5s, background-image 0.5s, background-color 0.5s;
+}
+
+#scrollToTopBtn:hover {
+  /*box-shadow: 0 0 50px rgba(0, 0, 0, 0.5); /* Горизонтальное смещение, вертикальное смещение, размытие и цвет тени */
+  background-image: url(images/up_button0.png);
+  border: 1px solid #185781;
+  background-color: transparent;
+}
+
+#slider {
+  position: relative;
+  top: 10vh;
+  margin: auto;
+  background-color: white;
+  width: 54.02vw;
+  height: 62vh;
+  border-radius: 30px;
+  overflow: hidden; /* Скрываем всё, что выходит за пределы слайдера */
+
+  -webkit-box-shadow: 0px 1px 10px 6px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 1px 10px 6px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 1px 10px 6px rgba(34, 60, 80, 0.2);
+}
+
+.slides {
+  display: flex; /* Размещаем слайды в одну строку */
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease-in-out; /* Анимация перехода */
+}
+
+.slider-image {
+  /*
+  width: 1037.2px;
+  height: 583px;
+  width: 54.02vw;
+  height: 62vh;
+*/
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Сохраняем пропорции изображения */
+  border-radius: 30px;
+  flex-shrink: 0; /* Запрещаем сжатие слайдов */
+}
+
+/*#region Стили для кнопок */
+#prevButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-image: url(images/slider_left_button.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 18px;
+  z-index: 10;
+
+  width: 4vw;
+  height: 6vh;
+  transition: background-image 0.5s, color 0.5s;
+}
+
+#nextButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-image: url(images/slider_right_button.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 18px;
+  z-index: 10;
+
+  width: 4vw;
+  height: 6vh;
+  transition: background-image 0.5s, color 0.5s;
+}
+
+#prevButton {
+  left: 10px;
+}
+
+#nextButton {
+  right: 10px;
+}
+
+#nextButton:hover {
+  background-image: url(images/Slider\ right\ button0.svg);
+  border: 1px solid #185781;
+  color: rgba(0, 0, 0, 0);
+  background-color: transparent;
+}
+
+#prevButton:hover {
+  background-image: url(images/Slider\ left\ button0.png);
+  border: 1px solid #185781;
+  color: rgba(0, 0, 0, 0);
+  background-color: transparent;
+}
+/*#endregion*/
+
+.blocks {
+  margin-top: 26vh; /* Заменяем top на margin-top */
+  top: 26vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: min-content; /*height: 430vh;*/
+  gap: 8vh;
+}
+
+.title {
+  font-family: "Verdana", Arial;
+  font-size: 24px;
+  /*
+  position: relative;
+  top: 1vh;
+  */
+  padding-top: 1vh;
+  width: 20vw;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  color: #2688cb;
+}
+
+.block-size {
+  width: var(--block-width);
+  height: var(--block-height);
+}
+
+.text {
+  position: relative;
+  top: 2.25vh;
+  padding-left: 2.5vw;
+  padding-right: 2.5vw;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: "Verdana", Arial;
+  font-size: 18px;
+  text-align: justify;
+}
+
+#introduction {
+  position: relative;
+  margin: auto;
+  background-color: white;
+  /* height: 56vh; */
+  border-radius: 30px;
+  display: flex; /* Используем Flexbox */
+  align-items: center; /* Выравниваем элементы по вертикали */
+  justify-content: space-between; /* Распределяем пространство между колонками */
+
+  -webkit-box-shadow: 0px 1px 10px 6px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 1px 10px 6px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 1px 10px 6px rgba(34, 60, 80, 0.2);
+}
+
+/* Контейнер для текста и заголовка */
+.introduction-content {
+  display: flex;
+  flex-direction: column; /* Располагаем текст и заголовок вертикально */
+  justify-content: center; /* Выравниваем по центру вертикально */
+  width: 50%; /* Ширина колонки с текстом */
+  height: 50vh;
+  padding-right: 2vw; /* Отступ справа */
+  padding-left: 2vw;
+}
+
+.introduction-text {
+  position: relative;
+  margin: auto;
+  margin-top: 2vh;
+  margin-bottom: 33vh;
+  width: 100%; /* Занимает всю ширину колонки */
+  height: min-content;
+  text-align: justify;
+  font-family: "Verdana", Arial;
+  font-size: 18px;
+}
+
+.introduction-title {
+  position: relative;
+  top: 1vh;
+  width: 100%; /* Занимает всю ширину колонки */
+
+  display: flexbox;
+  justify-content: center;
+  text-align: center;
+  font-family: "Verdana", Arial;
+  font-size: 24px;
+  color: #2688cb;
+}
+
+#intro-image {
+  height: 56vh;
+  width: 50%; /* Ширина колонки с картинкой */
+  object-fit: cover; /* Чтобы картинка сохраняла пропорции */
+  border-radius: 30px 0px 0px 30px;
+}
+
+#services {
+  position: relative;
+  margin: auto;
+  background-color: white;
+  height: 72vh;
+  border-radius: 30px;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  -webkit-box-shadow: 0px 1px 10px 6px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 1px 10px 6px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 1px 10px 6px rgba(34, 60, 80, 0.2);
+}
+
+.service-title {
+  font-family: "Verdana", Arial;
+  font-size: 24px;
+  position: relative;
+  top: 1vh;
+  width: 20vw;
+  margin: auto;
+  display: flexbox;
+  justify-content: center;
+  text-align: center;
+  color: #2688cb;
+}
+
+.service-cards {
+  margin: auto;
+  width: 50vw;
+  display: flex;
+  flex-wrap: wrap; /* Разрешаем перенос карточек на новую строку */
+  gap: 20px; /* Отступ между карточками */
+  justify-content: space-between; /* Равномерное распределение карточек */
+}
+
+.service-card {
+  width: calc(
+    50% - 10px
+  ); /* Ширина карточки (50% минус половина отступа) чтобы между карточками был равномерный отступ.*/
+  height: 30vh;
+  border: 1px solid #185781;
+  display: flex;
+  flex-direction: column; /* Располагаем текст и заголовок вертикально */
+  justify-content: center; /* Выравниваем по центру вертикально */
+  align-items: center; /* Выравниваем по центру горизонтально */
+  border-radius: 10px; /* Закругление углов */
+  box-sizing: border-box; /* Учитываем padding и border в общей ширине */
+  padding: 10px; /* Внутренние отступы */
+}
+
+.service-card-title {
+  text-align: center;
+  font-family: "Verdana", Arial;
+  font-size: 24px;
+  color: #2688cb;
+  margin-bottom: 10px; /* Отступ снизу для заголовка */
+}
+
+.service-card-text {
+  text-align: justify;
+  font-family: "Verdana", Arial;
+  font-size: 18px;
+  margin-bottom: 10px; /* Отступ снизу для текста */
+  flex-grow: 1; /* Текст занимает всё доступное пространство */
+}
+
+.price {
+  font-family: "Verdana", Arial;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.order {
+  border-radius: 6px;
+  background-color: #185781;
+  font-family: "Verdana", Arial;
+  font-size: 18px;
+  color: #f1f1f1;
+  font-weight: bold;
+  border: 1px;
+  border-color: #185781;
+  padding: 20px 30px;
+  cursor: pointer;
+  transition: background-color 0.5s, color 0.5s, box-shadow 0.5s, transform 0.5s;
+}
+
+.order:hover {
+  background-color: rgba(0, 0, 0, 0);
+  color: #185781;
+  border: 1px solid #185781; /* Граница остаётся видимой */
+}
+
+.order:active {
+  transform: scale(0.95); /* Уменьшаем кнопку на 5% */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Уменьшаем тень */
+  background-color: rgba(0, 0, 0, 0.1); /* Добавляем лёгкий фон */
+}
+
+#how-we-work {
+  position: relative;
+  margin: auto;
+  background-color: white;
+  /* height: min-content; height: 56vh; */
+  border-radius: 30px;
+
+  display: flex;
+  align-items: center; /* Выравниваем по центру горизонтально */
+  flex-direction: column;
+
+  -webkit-box-shadow: 0px 1px 10px 6px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 1px 10px 6px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 1px 10px 6px rgba(34, 60, 80, 0.2);
+}
+
+.how-we-work-title {
+  font-family: "Verdana", Arial;
+  font-size: 24px;
+  position: relative;
+  top: 1vh;
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  color: #2688cb;
+}
+
+.how-we-work-text {
+  position: relative;
+  /*top: 2.25vh;*/
+  padding: 2vw;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: "Verdana", Arial;
+  font-size: 18px;
+}
+
+#about-us {
+  position: relative;
+  margin: auto;
+  background-color: white;
+  /* height: min-content; */
+  padding-bottom: 5vh;
+  border-radius: 30px;
+
+  display: flex;
+  align-items: center; /* Выравниваем по центру горизонтально */
+  flex-direction: column;
+  /*gap: 20px;/* попробуй для отступа между элементами равномерного в блоках*/
+
+  -webkit-box-shadow: 0px 1px 10px 6px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 1px 10px 6px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 1px 10px 6px rgba(34, 60, 80, 0.2);
+}
+
+.why-choose-us {
+  position: relative;
+  top: 5vh;
+  font-family: "Verdana", Arial;
+  font-size: 24px;
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: auto;
+
+  color: #2688cb;
+}
+
+.why-choose-us-icons {
+  /*
+  position: relative;
+  top: 6vh;
+  */
+  margin-top: 6vh;
+  width: 73vw;
+
+  display: flex;
+  flex-wrap: wrap; /* Разрешаем перенос иконок на новую строку */
+  gap: 5vw; /* Отступ между иконками */
+  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+}
+
+.why-choose-us-icon {
+  /*width: 100px;
+  height: 100px;*/
+  object-fit: contain; /* Сохраняет пропорции и обрезает лишнее */
+}
+
+.icon-box {
+  width: 16vw; /*width: 20vw*/
+  display: flex;
+  flex-direction: column; /* Располагаем текст и заголовок вертикально */
+  justify-content: center; /* Выравниваем по центру вертикально */
+  align-items: center; /* Выравниваем по центру горизонтально */
+}
+
+.icon-title {
+  font-family: "Verdana", Arial;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  justify-content: center; /* Выравниваем по центру вертикально */
+  align-items: center; /* Выравниваем по центру горизонтально */
+}
+
+#contact {
+  position: relative;
+  margin: auto;
+  background-color: white;
+  height: 36vh;
+  border-radius: 30px;
+
+  display: flex;
+  align-items: center; /* Выравниваем по центру горизонтально */
+  flex-direction: column;
+
+  -webkit-box-shadow: 0px 1px 10px 6px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 1px 10px 6px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 1px 10px 6px rgba(34, 60, 80, 0.2);
+}
+
+.contact-text {
+  position: relative;
+  top: 3vh;
+  width: 55vw;
+
+  font-family: "Verdana", Arial;
+  font-size: 18px;
+  text-align: center;
+}
+
+.contact-icons {
+  position: relative;
+  top: 8vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 32vw;
+}
+
+.contact-icon {
+  cursor: pointer;
+  transition: filter 0.3s ease; /* Плавное изменение тени по контуру иконки а не по блоку */
+}
+
+.contact-icon:hover {
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5)); /* Тень по контуру иконки */
+}
+
+footer {
+  position: relative;
+  background-color: #ffffff;
+  color: black;
+  width: 100%;
+  height: 16vh;
+  box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+  font-family: "Verdana", Arial;
+  margin-top: auto; /* Прижимаем футер к нижнему краю */
+  padding-left: 1vw;
+}
+
+/*#region mobile adaptation*/
+@media screen and (orientation: portrait) and (min-device-width: 320px) and (max-device-width: 820px) {
+  .Up-menu {
+    width: 100%; /* Изменяем ширину элемента для мобильных устройств */
+    margin: auto; /* Центрируем элемент по горизонтали */
+    display: none; /* прячем пк версию меню на телефонах*/
+  }
+
+  #slider {
+    width: 80vw;
+    height: 40vh;
+  }
+
+  #nextButton {
+    background-size: 50px 50px;
+    width: 8vw;
+    height: 4vh;
+  }
+
+  #prevButton {
+    background-size: 50px 50px;
+    width: 8vw;
+    height: 4vh;
+  }
+
+  .block-size {
+    width: var(--block-width-mobile);
+  }
+
+  #introduction {
+    flex-direction: column;
+  }
+
+  #intro-image {
+    border-radius: 30px 30px 0px 0px;
+    width: 100%;
+  }
+
+  .introduction-content {
+    width: 90%;
+    height: 50%;
+  }
+
+  .introduction-text {
+    margin-bottom: 2vh;
+    margin-top: 2vh;
+  }
+
+  #services {
+    height: min-content;
+  }
+
+  .service-cards {
+    width: 80vw; /* Увеличиваем ширину контейнера карточек */
+    flex-direction: column; /* Карточки располагаются вертикально */
+    gap: 10px; /* Уменьшаем отступ между карточками */
+  }
+
+  .service-card {
+    width: 100%; /* Карточки занимают всю ширину контейнера */
+    height: auto; /* Высота карточек автоматически подстраивается под контент */
+    padding: 15px; /* Увеличиваем внутренние отступы для удобства */
+  }
+
+  .service-card-title {
+    font-size: 20px; /* Уменьшаем размер шрифта заголовка */
+  }
+
+  .service-card-text {
+    font-size: 16px; /* Уменьшаем размер шрифта текста */
+  }
+
+  .service-card-text ul {
+    padding-left: 20px; /* Уменьшаем отступ списка */
+  }
+
+  .service-card-text li {
+    font-size: 14px; /* Уменьшаем размер шрифта элементов списка */
+    margin-bottom: 5px; /* Уменьшаем отступ между элементами списка */
+  }
+
+  .price {
+    font-size: 16px; /* Уменьшаем размер шрифта цены */
+  }
+
+  .order {
+    padding: 15px 20px; /* Уменьшаем размер кнопки */
+    font-size: 16px; /* Уменьшаем размер шрифта кнопки */
+  }
+
+  .why-choose-us-icons {
+    width: 78vw;
+  }
+
+  .why-choose-us-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .icon-title {
+    font-size: 14px;
+  }
+
+  .contact-icon {
+    width: 50px;
+    height: 50px;
+  }
+  .contact-icons {
+    width: 38vw;
+    top: 5vh;
+  }
+}
+
+@media screen and (min-device-width: 821px) {
+  .menu-triger {
+    display: none; /* прячем мобильную версию меню на пк */
+  }
+}
+/*#endregion*/

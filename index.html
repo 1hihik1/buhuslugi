@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Бухгалтерские услуги</title>
+    <script
+      src="https://code.jquery.com/jquery-3.6.3.js"
+      integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <script>
+        //анимация для menub на jQuery(подключено в head) (скрипт здесь потому что в main.js нет подключения к jQuery и из-за этого будут ошибки)
+        $(function () {
+          let $menu_popup = $(".menu-popup");
+
+          $(".menu-triger").click(function () {
+            $("body").addClass("body_pointer");
+            $menu_popup.show(0);
+            $menu_popup.animate(
+              {
+                left:
+                  parseInt($menu_popup.css("left"), 10) == 0
+                    ? -$menu_popup.outerWidth()
+                    : 0,
+              },
+              300
+            );
+            return false;
+          });
+
+          $(".menu-close").click(function () {
+            $("body").removeClass("body_pointer");
+            $menu_popup.animate(
+              {
+                left:
+                  parseInt($menu_popup.css("left"), 10) == 0
+                    ? -$menu_popup.outerWidth()
+                    : 0,
+              },
+              300,
+              function () {
+                $menu_popup.hide(0);
+              }
+            );
+            return false;
+          });
+
+          $(document).on("click", function (e) {
+            if (!$(e.target).closest(".menu-popup").length) {
+              $("body").removeClass("body_pointer");
+              $menu_popup.animate(
+                {
+                  left:
+                    parseInt($menu_popup.css("left"), 10) == 0
+                      ? -$menu_popup.outerWidth()
+                      : 0,
+                },
+                300,
+                function () {
+                  $menu_popup.hide(0);
+                }
+              );
+            }
+          });
+        });
+      </script>
+      <!-- Кнопка "наверх" -->
+      <button onclick="scrollToTop()" id="scrollToTopBtn" title="Наверх">
+        <!--<img src="images/up_button.svg" width="50px" height="50px" />-->
+      </button>
+
+      <header>
+        <div class="Up-menu">
+          <div class="Up-menu-center-button-L">
+            <a href="#services" class="menua">Услуги</a>
+          </div>
+          <div class="Up-menu-center-button">
+            <a href="#about-us" class="menua">О нас</a>
+          </div>
+          <div class="Up-menu-center-button-R">
+            <a href="#how-we-work" class="menua">Как мы работаем</a>
+          </div>
+          <div class="Up-menu-right-button">
+            <a href="#contact" class="menua">Контакты</a>
+          </div>
+        </div>
+        <img
+          src="images/logo-site.png"
+          id="logo"
+          onclick="window.location.href='https://example.com';"
+        />
+        <div class="menu">
+          <a class="menu-triger" href="#"></a>
+          <div class="menu-popup">
+            <a class="menu-close" href="#"></a>
+            <ul>
+              <li><a href="#services" class="menub">Услуги</a></li>
+              <li><a href="#about-us" class="menub">О нас</a></li>
+              <li><a href="#how-we-work" class="menub">Как мы работаем</a></li>
+              <li><a href="#contact" class="menub">Контакты</a></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <main>
+        <div id="slider">
+          <div class="slides">
+            <img src="images/image 1.png" class="slider-image" />
+            <img src="images/image 2.png" class="slider-image" />
+          </div>
+          <button id="prevButton"></button>
+          <!-- Кнопка "Назад" -->
+          <button id="nextButton"></button>
+          <!-- Кнопка "Вперед" -->
+        </div>
+
+        <div class="blocks">
+          <div id="introduction" class="block-size">
+            <img src="images/intro-image.png" id="intro-image" />
+            <div class="introduction-content">
+              <div class="introduction-title">Бухгалтерские услуги</div>
+              <div class="introduction-text">
+                Здравствуйте, я профессиональный бухгалтер с опытом работы 20
+                лет. Если вы ищете надежного специалиста для ведения
+                бухгалтерии, сдачи отчетности или консультаций, вы обратились по
+                адресу!
+              </div>
+            </div>
+          </div>
+
+          <div id="services" class="block-size">
+            <div class="title">Услуги которые мы оказываем</div>
+            <div class="service-cards">
+              <div class="service-card">
+                <div class="service-card-title">Ведение учёта ИП</div>
+                <div class="service-card-text">
+                  Полное сопровождение учета для ИП. Своевременная сдача
+                  отчетности.
+                </div>
+                <div class="price">от 5 000 руб</div>
+                <button
+                  class="order"
+                  onclick="window.location.href='#contact';"
+                >
+                  Заказать
+                </button>
+              </div>
+
+              <div class="service-card">
+                <div class="service-card-title">Декларация 3-НДФЛ</div>
+                <div class="service-card-text">
+                  <ul>
+                    <li>Консультации по возврату НДФЛ</li>
+                    <li>Заполнение декларации 3-НДФЛ</li>
+                    <li>Сдача декларации 3-НДФЛ в налоговую</li>
+                  </ul>
+                </div>
+                <div class="price">от 1 000 руб</div>
+                <button
+                  class="order"
+                  onclick="window.location.href='#contact';"
+                >
+                  Заказать
+                </button>
+              </div>
+
+              <div class="service-card">
+                <div class="service-card-title">Консультации</div>
+                <div class="service-card-text">
+                  Ответы на вопросы по бухгалтерии, налогам и кадровому учету.
+                </div>
+                <div class="price">от 1 000 руб</div>
+                <button
+                  class="order"
+                  onclick="window.location.href='#contact';"
+                >
+                  Заказать
+                </button>
+              </div>
+
+              <div class="service-card">
+                <div class="service-card-title">Ведение бухгалтерии</div>
+                <div class="service-card-text">
+                  <ul>
+                    <li>Составление счетов</li>
+                    <li>Начисление заработной платы</li>
+                    <li>Сдача нулевой отчётности</li>
+                  </ul>
+                </div>
+                <div class="price">от 5 000 руб</div>
+                <button
+                  class="order"
+                  onclick="window.location.href='#contact';"
+                >
+                  Заказать
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div id="how-we-work" class="block-size">
+            <div class="how-we-work-title">Как мы работаем</div>
+            <div class="how-we-work-text">
+              Сотрудничество с нами — это просто и удобно. Мы ценим ваше время,
+              поэтому организовали процесс так, чтобы вы могли сосредоточиться
+              на своем бизнесе, а мы — на решении ваших бухгалтерских задач.<br /><br />
+              Вот как это происходит:
+              <ol>
+                <li>
+                  Заявка или звонок <br />
+                  Вы оставляете заявку на сайте, пишете нам в WhatsApp/Telegram
+                  или звоните. Мы уточним, какие услуги вам нужны, и ответим на
+                  все вопросы.
+                </li>
+                <li>
+                  Консультация и согласование <br />
+                  Мы проведем бесплатную консультацию, чтобы понять ваши задачи
+                  и предложить оптимальное решение. Обсудим сроки, стоимость и
+                  детали сотрудничества.
+                </li>
+                <li>
+                  Заключение договора <br />
+                  Если вас всё устраивает, мы заключаем договор. Вы можете быть
+                  уверены в прозрачности и надежности нашей работы.
+                </li>
+                <li>
+                  Выполнение задач <br />
+                  Мы приступаем к работе: ведем учет, готовим отчетность,
+                  консультируем или решаем другие задачи. Вы всегда можете
+                  связаться с нами, чтобы уточнить детали. Результат и
+                  поддержкаВы получаете готовый результат в оговоренные сроки.
+                  Мы остаемся на связи и готовы помочь, если у вас появятся
+                  новые вопросы или задачи.
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <div id="about-us" class="block-size">
+            <div class="title">О нас</div>
+            <div class="text">
+              Я профессиональный бухгалтер с опытом работы 20 лет. Я помогаю
+              предпринимателям и небольшим компаниям вести бухгалтерию, сдавать
+              отчетность и решать сложные задачи. Моя цель — сделать ваш бизнес
+              успешным, а вашу жизнь — проще. Оставьте заявку, и я помогу вам с
+              бухгалтерией!
+            </div>
+            <div class="why-choose-us">Почему выбирают нас:</div>
+            <div class="why-choose-us-icons">
+              <div class="icon-box">
+                <img
+                  src="images/user-expirience.svg"
+                  class="why-choose-us-icon"
+                />
+                <div class="icon-title">Опыт и профессионализм</div>
+              </div>
+              <div class="icon-box">
+                <img src="images/individual.svg" class="why-choose-us-icon" />
+                <div class="icon-title">Индивидуальный подход</div>
+              </div>
+              <div class="icon-box">
+                <img src="images/shield.svg" class="why-choose-us-icon" />
+                <div class="icon-title">Надёжность и прозрачность</div>
+              </div>
+              <div class="icon-box">
+                <img src="images/connection.svg" class="why-choose-us-icon" />
+                <div class="icon-title">Всегда на связи</div>
+              </div>
+              <div class="icon-box">
+                <img src="images/rubl.svg" class="why-choose-us-icon" />
+                <div class="icon-title">Доступные цены</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="contact" class="block-size">
+            <div class="title">Контакты</div>
+            <div class="contact-text">
+              Вы можете связаться с нами через социальные сети при нажатии на
+              соответствующие кнопки ниже, а также по почте
+              <a
+                href="mailto:ceregaf2003@yandex.ru"
+                class="link"
+                onclick="copyToClipboard('ceregaf2003@yandex.ru')"
+                >example@mail.ru</a
+              >
+              или по телефону
+              <a
+                href="tel:+79303401249"
+                class="link"
+                onclick="copyToClipboard('+79303401249')"
+                >89303401249</a
+              >
+            </div>
+            <div class="contact-icons">
+              <img
+                src="images/telegram-icon.svg"
+                onclick="window.open('https://t.me/ваш_username', '_blank');"
+                class="contact-icon"
+              />
+              <img
+                src="images/whatsapp-icon.svg"
+                onclick="window.open('https://web.whatsapp.com/', '_blank');"
+                class="contact-icon"
+              />
+              <img
+                src="images/vk-icon.svg"
+                onclick="window.open('https://vk.com/', '_blank');"
+                class="contact-icon"
+              />
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer>
+        <p>Icons by <a href="https://icons8.com" class="link">Icons8</a></p>
+        <p>© 2025 buhuslugi.ru</p>
+      </footer>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
